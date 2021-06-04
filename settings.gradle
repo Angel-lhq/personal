@@ -1,0 +1,3 @@
+include ':kotlinlibrary'
+include ':app'
+rootProject.name = "DoSomething"
