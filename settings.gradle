@@ -1,3 +1,4 @@
 include ':kotlinlibrary'
 include ':app'
+include ':library'
 rootProject.name = "DoSomething"
