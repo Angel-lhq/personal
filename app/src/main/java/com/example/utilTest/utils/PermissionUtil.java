@@ -2,7 +2,6 @@ package com.example.utilTest.utils;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -10,9 +9,10 @@ import android.os.Build;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.example.utilTest.views.CustomDialog1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,16 +143,17 @@ public class PermissionUtil {
     /**
      * 不再提示权限时的展示对话框
      */
-    AlertDialog mPermissionDialog;
+    CustomDialog1 mPermissionDialog;
 
     private void showSystemPermissionsSettingDialog(final Activity context) {
         final String mPackName = context.getPackageName();
         if (mPermissionDialog == null) {
-            mPermissionDialog = new AlertDialog.Builder(context)
+            mPermissionDialog = (CustomDialog1) DialogManager.getInstance().create(context,DialogManager.CUSTOMDIALOG1);
+            mPermissionDialog.setTitle("提示")
                     .setMessage("权限已禁用，请前往设置手动授予")
-                    .setPositiveButton("设置", new DialogInterface.OnClickListener() {
+                    .setYesOnclickListener("设置", new CustomDialog1.onYesOnclickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onYesOnclick() {
                             cancelPermissionDialog();
 
                             Uri packageURI = Uri.parse("package:" + mPackName);
@@ -161,16 +162,15 @@ public class PermissionUtil {
                             context.finish();
                         }
                     })
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    .setNoOnclickListener("取消", new CustomDialog1.onNoOnclickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onNoClick() {
                             //关闭页面或者做其他操作
                             cancelPermissionDialog();
                             //mContext.finish();
                             mPermissionsResult.forbitPermissons();
                         }
-                    })
-                    .create();
+                    });
         }
         mPermissionDialog.show();
     }

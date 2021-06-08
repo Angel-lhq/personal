@@ -15,10 +15,12 @@ import com.example.utilTest.task.Action;
 import com.example.utilTest.task.Builder;
 import com.example.utilTest.task.Task;
 import com.example.utilTest.task.TaskBuilder;
+import com.example.utilTest.utils.DialogManager;
 import com.example.utilTest.utils.Log;
 import com.example.utilTest.utils.PermissionUtil;
 import com.example.utilTest.views.LoadingDialog;
 
+import static com.example.utilTest.utils.PermissionUtil.CAMERA;
 import static com.example.utilTest.utils.PermissionUtil.READ_CALENDAR;
 import static com.example.utilTest.utils.PermissionUtil.WRITE_CALENDAR;
 import static com.example.utilTest.utils.PermissionUtil.WRITE_EXTERNAL_STORAGE;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-//        showLoadingDialog();
+        showLoadingDialog();
 //        initData();
 //        test();
         initPermissions();
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private void initPermissions() {
         //两个日历权限和一个数据读写权限
         String[] permissions = new String[]{
+                CAMERA,
                 WRITE_CALENDAR,
                 READ_CALENDAR,
                 WRITE_EXTERNAL_STORAGE};
@@ -91,12 +94,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showLoadingDialog() {
-        //加载弹窗
-        LoadingDialog.Builder loadBuilder = new LoadingDialog.Builder(this)
-                .setMessage("加载中...")
-                .setCancelable(true)//返回键是否可点击
-                .setCancelOutside(false);//窗体外是否可点击
-        dialog = loadBuilder.create();
+//        //加载弹窗
+//        LoadingDialog.Builder loadBuilder = new LoadingDialog.Builder(this)
+//                .setMessage("加载中...")
+//                .setCancelable(true)//返回键是否可点击
+//                .setCancelOutside(false);//窗体外是否可点击
+//        dialog = loadBuilder.create();
+        dialog = (LoadingDialog) DialogManager.getInstance().create(this,DialogManager.LOADINGDIALOG);
         dialog.show();//显示弹窗
         handler.postDelayed(runnable,1000);
     }
