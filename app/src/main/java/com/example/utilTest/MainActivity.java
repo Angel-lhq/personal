@@ -3,7 +3,9 @@ package com.example.utilTest;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -14,7 +16,12 @@ import com.example.utilTest.task.Builder;
 import com.example.utilTest.task.Task;
 import com.example.utilTest.task.TaskBuilder;
 import com.example.utilTest.utils.Log;
+import com.example.utilTest.utils.PermissionUtil;
 import com.example.utilTest.views.LoadingDialog;
+
+import static com.example.utilTest.utils.PermissionUtil.READ_CALENDAR;
+import static com.example.utilTest.utils.PermissionUtil.WRITE_CALENDAR;
+import static com.example.utilTest.utils.PermissionUtil.WRITE_EXTERNAL_STORAGE;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -27,9 +34,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        showLoadingDialog();
-        initData();
+//        showLoadingDialog();
+//        initData();
 //        test();
+        initPermissions();
+    }
+
+    /**
+     * 记得要在AndroidManifest.xml中添加相应权限
+     */
+    private void initPermissions() {
+        //两个日历权限和一个数据读写权限
+        String[] permissions = new String[]{
+                WRITE_CALENDAR,
+                READ_CALENDAR,
+                WRITE_EXTERNAL_STORAGE};
+//        PermissionsUtils.showSystemSetting = false;//是否支持显示系统设置权限设置窗口跳转
+        //这里的this不是上下文，是Activity对象！                                    //创建监听权限的接口对象
+        PermissionUtil.getInstance().checkPermissions(this, permissions, new PermissionUtil.IPermissionsResult() {
+            @Override
+            public void passPermissons() {
+                Toast.makeText(MainActivity.this, "权限通过，可以做其他事情!", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void forbitPermissons() {
+//            finish();
+                Toast.makeText(MainActivity.this, "权限未通过，请前往设置进行授予", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void initData() {
@@ -94,5 +127,12 @@ public class MainActivity extends AppCompatActivity {
         kotlin.add(3);
         kotlin.add(4);
         kotlin.add(5);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //就多一个参数this
+        PermissionUtil.getInstance().onRequestPermissionsResult(this, requestCode, permissions, grantResults);
     }
 }
