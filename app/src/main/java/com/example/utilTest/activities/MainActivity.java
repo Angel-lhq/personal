@@ -1,4 +1,4 @@
-package com.example.utilTest;
+package com.example.utilTest.activities;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.kotlinlibrary.Kotlin;
+import com.example.utilTest.R;
 import com.example.utilTest.net.HttpClientUtil;
 import com.example.utilTest.task.Action;
 import com.example.utilTest.task.Builder;
@@ -36,10 +37,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        showLoadingDialog();
+//        showLoadingDialog();
 //        initData();
 //        test();
-        initPermissions();
+//        initPermissions();
     }
 
     /**
@@ -138,5 +139,12 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         //就多一个参数this
         PermissionUtil.getInstance().onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    }
+
+
+    public void match(){
+        //wxp://f2f0SiaEzWuTXqOMOOV8lLKpd4hdegGLpiSO8i4qWdKGi0Y
+//        ^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"
+        String regex = "^wxp://(0-9|A-Z|a-z){46}$";
     }
 }
