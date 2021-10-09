@@ -1,4 +1,4 @@
-package com.example.utilTest;
+package com.example.utilTest.activities;
 
 import android.database.DataSetObserver;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.kotlinlibrary.Kotlin;
+import com.example.utilTest.R;
 import com.example.utilTest.net.HttpClientUtil;
 import com.example.utilTest.task.Action;
 import com.example.utilTest.task.Builder;
@@ -44,11 +45,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+<<<<<<< HEAD:app/src/main/java/com/example/utilTest/MainActivity.java
         initGridView();
+=======
+>>>>>>> 15fb27c0b33579a750dbb03614e8df42f5127ed3:app/src/main/java/com/example/utilTest/activities/MainActivity.java
 //        showLoadingDialog();
 //        initData();
 //        test();
 //        initPermissions();
+<<<<<<< HEAD:app/src/main/java/com/example/utilTest/MainActivity.java
     }
 
     private void initGridView() {
@@ -89,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
                 TextView textView;
             }
         });
+=======
+>>>>>>> 15fb27c0b33579a750dbb03614e8df42f5127ed3:app/src/main/java/com/example/utilTest/activities/MainActivity.java
     }
 
     /**
@@ -188,5 +195,12 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         //就多一个参数this
         PermissionUtil.getInstance().onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+    }
+
+
+    public void match(){
+        //wxp://f2f0SiaEzWuTXqOMOOV8lLKpd4hdegGLpiSO8i4qWdKGi0Y
+//        ^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"
+        String regex = "^wxp://(0-9|A-Z|a-z){46}$";
     }
 }
