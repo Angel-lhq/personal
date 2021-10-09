@@ -1,7 +1,14 @@
 package com.example.utilTest;
 
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,16 +37,58 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private LoadingDialog dialog;
     private TextView mText;
+    private GridView mGv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        showLoadingDialog();
+        initGridView();
+//        showLoadingDialog();
 //        initData();
 //        test();
-        initPermissions();
+//        initPermissions();
+    }
+
+    private void initGridView() {
+        String[] titles = new String[]{"1111","2222","33333","44444","55555","66666"};
+        mGv.setNumColumns(4);
+        mGv.setAdapter(new BaseAdapter() {
+            @Override
+            public int getCount() {
+                return titles.length;
+            }
+
+            @Override
+            public Object getItem(int position) {
+                return titles[position];
+            }
+
+            @Override
+            public long getItemId(int position) {
+                return position;
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                ViewHolder viewHolder;
+                if (convertView == null){
+                    convertView = LayoutInflater.from(MainActivity.this).inflate(R.layout.adapter_item,null);
+                    viewHolder = new ViewHolder();
+                    viewHolder.textView = convertView.findViewById(R.id.tv);
+                    convertView.setTag(viewHolder);
+                }else {
+                    viewHolder = (ViewHolder) convertView.getTag();
+                }
+                viewHolder.textView.setText(titles[position]);
+                return convertView;
+            }
+
+            class ViewHolder{
+                TextView textView;
+            }
+        });
     }
 
     /**
@@ -122,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView() {
         mText = findViewById(R.id.text);
+        mGv = findViewById(R.id.gv);
     }
 
     private void test() {
