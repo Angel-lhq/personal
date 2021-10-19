@@ -45,15 +45,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-<<<<<<< HEAD:app/src/main/java/com/example/utilTest/MainActivity.java
         initGridView();
-=======
->>>>>>> 15fb27c0b33579a750dbb03614e8df42f5127ed3:app/src/main/java/com/example/utilTest/activities/MainActivity.java
 //        showLoadingDialog();
 //        initData();
 //        test();
 //        initPermissions();
-<<<<<<< HEAD:app/src/main/java/com/example/utilTest/MainActivity.java
     }
 
     private void initGridView() {
@@ -94,8 +90,6 @@ public class MainActivity extends AppCompatActivity {
                 TextView textView;
             }
         });
-=======
->>>>>>> 15fb27c0b33579a750dbb03614e8df42f5127ed3:app/src/main/java/com/example/utilTest/activities/MainActivity.java
     }
 
     /**
