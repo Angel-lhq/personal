@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.utilTest.R;
+import com.example.utilTest.kotlin.KoinActivity;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -18,6 +19,8 @@ public class StartActivity extends AppCompatActivity {
     private Button mBtnMain;
     private Button mBtnHook;
     private Button mBtnReflex;
+    private Button mBtnKoin;
+    private Button mBtnGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +33,14 @@ public class StartActivity extends AppCompatActivity {
         mBtnMain = findViewById(R.id.btn_main);
         mBtnHook = findViewById(R.id.btn_hook);
         mBtnReflex = findViewById(R.id.btn_reflex);
+        mBtnKoin = findViewById(R.id.btn_koin);
+        mBtnGame = findViewById(R.id.btn_game);
 
         mBtnMain.setOnClickListener(localClickListener);
         mBtnHook.setOnClickListener(localClickListener);
         mBtnReflex.setOnClickListener(localClickListener);
+        mBtnKoin.setOnClickListener(localClickListener);
+        mBtnGame.setOnClickListener(localClickListener);
 
         hookOnClickListener(mBtnMain);
     }
@@ -77,6 +84,12 @@ public class StartActivity extends AppCompatActivity {
                     break;
                 case R.id.btn_reflex:
                     startActivity(new Intent(StartActivity.this,ReflexActivity.class));
+                    break;
+                case R.id.btn_koin:
+                    startActivity(new Intent(StartActivity.this, KoinActivity.class));
+                    break;
+                case R.id.btn_game:
+                    startActivity(new Intent(StartActivity.this, SnakeActivity.class));
                     break;
                 default:
                     break;

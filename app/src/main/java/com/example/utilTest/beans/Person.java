@@ -11,6 +11,7 @@ import java.util.HashMap;
  * @time 2017/3/29 22:19.
  */
 public class Person {
+
     public String country;
     public String city;
     private String name;
@@ -31,6 +32,38 @@ public class Person {
 
     public Person(String country, Integer age) {
         this.country = country;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
         this.age = age;
     }
 
